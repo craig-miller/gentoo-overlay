@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit meson optfeature
+inherit meson optfeature pam
 
 MY_COMMIT="f95e95cafde8c23f1d3a62b969e2b5717c96d741"
 
@@ -68,6 +68,7 @@ DOCS=( README.md CREDITS.md example.toml )
 PATCHES=(
 	"${FILESDIR}"/noctalia-shell-zentoo-brightness-ipc.patch
 	"${FILESDIR}"/noctalia-shell-zentoo-privacy-passive.patch
+	"${FILESDIR}"/noctalia-shell-lockscreen-pam-gnupg.patch
 )
 
 src_configure() {
@@ -75,6 +76,11 @@ src_configure() {
 			$(meson_feature jemalloc)
 	)
 	meson_src_configure
+}
+
+src_install() {
+	meson_src_install
+	newpamd "${FILESDIR}"/noctalia-lock.pam noctalia-lock
 }
 
 pkg_postinst() {

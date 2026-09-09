@@ -1,0 +1,6 @@
+#%PAM-1.0
+# Noctalia lockscreen unlock. pam_gnupg receives the typed password during
+# auth and uses pam_setcred from Noctalia to refresh gpg-agent/pass credentials.
+auth     include   system-auth
+auth     optional  pam_gnupg.so
+account  include   system-auth

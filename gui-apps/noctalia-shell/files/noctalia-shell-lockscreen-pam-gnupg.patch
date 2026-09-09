@@ -1,0 +1,38 @@
+diff -ruN noctalia-src-inspect/noctalia-f95e95cafde8c23f1d3a62b969e2b5717c96d741/src/auth/pam_authenticator.cpp noctalia-patch-work/src/auth/pam_authenticator.cpp
+--- a/src/auth/pam_authenticator.cpp	2026-09-03 09:57:59.000000000 -0700
++++ b/src/auth/pam_authenticator.cpp	2026-09-09 12:42:11.574881939 -0700
+@@ -213,6 +213,18 @@
+       if (acctRc != PAM_SUCCESS && acctRc != PAM_AUTHINFO_UNAVAIL) {
+         rc = acctRc;
+       }
++      if (rc == PAM_SUCCESS) {
++        // Screen-locker services such as pam_gnupg need pam_setcred after
++        // authentication so they can consume the password captured during the
++        // auth stack and refresh the user's credential cache.
++        const int credRc = pam_setcred(pamh.h, PAM_ESTABLISH_CRED);
++        kLog.debug("pam_setcred rc={} ({})", credRc, pam_strerror(pamh.h, credRc));
++        // pam_setcred is best-effort for a lockscreen unlock: PAM auth already
++        // proved identity, and some stacks do not implement credential setup.
++        if (credRc != PAM_SUCCESS && credRc != PAM_CRED_UNAVAIL) {
++          kLog.warn("pam_setcred failed rc={} ({})", credRc, pam_strerror(pamh.h, credRc));
++        }
++      }
+     }
+     const char* err = pam_strerror(pamh.h, rc);
+     const std::string errStr = err != nullptr ? err : i18n::tr("auth.pam.authentication-failed");
+diff -ruN noctalia-src-inspect/noctalia-f95e95cafde8c23f1d3a62b969e2b5717c96d741/src/shell/lockscreen/lock_screen.cpp noctalia-patch-work/src/shell/lockscreen/lock_screen.cpp
+--- a/src/shell/lockscreen/lock_screen.cpp	2026-09-03 09:57:59.000000000 -0700
++++ b/src/shell/lockscreen/lock_screen.cpp	2026-09-09 12:42:11.575304773 -0700
+@@ -866,10 +866,10 @@
+   updatePromptOnSurfaces();
+ 
+   const PamAuthenticator authenticator = m_authenticator;
+-  // Authenticate against the "login" stack. If fingerprint is enabled, strip
++  // Authenticate against the lockscreen stack. If fingerprint is enabled, strip
+   // pam_fprintd from it: noctalia drives the reader itself over D-Bus and the
+   // two can't share the sensor. See docs/fingerprint.md.
+-  const std::string pamService = "login";
++  const std::string pamService = "noctalia-lock";
+   std::thread([this, generation, password = std::move(password), authenticator, pamService]() mutable {
+     const auto result = authenticator.authenticateCurrentUser(password, pamService);
+     clearSensitiveString(password);
