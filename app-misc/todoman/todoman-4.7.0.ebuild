@@ -36,8 +36,15 @@ src_prepare() {
 	default
 
 	# Upstream's pyproject.toml omits build-backend, but distutils-r1
-	# requires it for PEP 517 builds.
-	printf '\nbuild-backend = "setuptools.build_meta"\n' >> pyproject.toml || die
+	# requires it for PEP 517 builds. It must be set inside [build-system].
+	python - <<-EOF || die
+		from pathlib import Path
+		path = Path("pyproject.toml")
+		text = path.read_text()
+		old = '[build-system]\nrequires = ["setuptools>=77", "wheel", "setuptools_scm>=6.2"]\n'
+		new = old + 'build-backend = "setuptools.build_meta"\n'
+		path.write_text(text.replace(old, new, 1))
+	EOF
 }
 
 EPYTEST_PLUGINS=()
