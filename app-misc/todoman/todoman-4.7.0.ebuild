@@ -30,7 +30,7 @@ BDEPEND="
 	>=dev-python/setuptools-scm-6.2[${PYTHON_USEDEP}]
 "
 
-DOCS=( AUTHORS.rst CHANGELOG.rst CONTRIBUTING.rst README.rst )
+DOCS=( AUTHORS.rst CHANGELOG.rst README.rst )
 
 src_prepare() {
 	default
