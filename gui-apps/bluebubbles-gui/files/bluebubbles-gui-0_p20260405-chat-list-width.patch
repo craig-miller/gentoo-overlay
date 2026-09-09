@@ -1,0 +1,11 @@
+--- a/gui/app.go
++++ b/gui/app.go
+@@ -64,7 +64,7 @@ type App struct {
+ 	wsRefreshTimer       *time.Timer
+ }
+ 
+-const fixedChatListWidth = float32(105)
++const fixedChatListWidth = float32(315)
+ const appPreferencesID = "com.bluebubbles-tui.gui"
+ const initialMessageFetchLimit = 50
+ 

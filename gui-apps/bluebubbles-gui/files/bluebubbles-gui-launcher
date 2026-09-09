@@ -1,0 +1,30 @@
+#!/bin/sh
+# Launch bluebubbles-gui with credentials loaded from pass.
+
+set -eu
+
+server_url="$(pass show api/bluebubbles/server_url 2>/dev/null | sed -n '1p')" || {
+	echo "bluebubbles-gui-launcher: missing pass entry api/bluebubbles/server_url" >&2
+	exit 1
+}
+
+password="$(pass show api/bluebubbles/password 2>/dev/null | sed -n '1p')" || {
+	echo "bluebubbles-gui-launcher: missing pass entry api/bluebubbles/password" >&2
+	exit 1
+}
+
+if [ -z "${server_url}" ]; then
+	echo "bluebubbles-gui-launcher: pass entry api/bluebubbles/server_url is empty" >&2
+	exit 1
+fi
+
+if [ -z "${password}" ]; then
+	echo "bluebubbles-gui-launcher: pass entry api/bluebubbles/password is empty" >&2
+	exit 1
+fi
+
+export BB_SERVER_URL="${server_url}"
+export BB_PASSWORD="${password}"
+export FYNE_SCALE="${FYNE_SCALE:-1.3}"
+
+exec bluebubbles-gui "$@"
