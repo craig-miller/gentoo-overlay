@@ -32,5 +32,13 @@ BDEPEND="
 
 DOCS=( AUTHORS.rst CHANGELOG.rst CONTRIBUTING.rst README.rst )
 
+src_prepare() {
+	default
+
+	# Upstream's pyproject.toml omits build-backend, but distutils-r1
+	# requires it for PEP 517 builds.
+	printf '\nbuild-backend = "setuptools.build_meta"\n' >> pyproject.toml || die
+}
+
 EPYTEST_PLUGINS=()
 distutils_enable_tests pytest
