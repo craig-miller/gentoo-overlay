@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Typing Tutor
+GenericName=Typing Practice
+Comment=Practice typing and measure speed and accuracy
+Exec=foot --app-id=typioca --title="Typing Tutor" /usr/bin/typioca
+TryExec=typioca
+Icon=input-keyboard
+Terminal=false
+Categories=Education;
+Keywords=typing;keyboard;practice;speed;wpm;typioca;
