@@ -1,0 +1,13 @@
+Make bar system-monitor graph backgrounds transparent without changing
+palette colors elsewhere or the graph's line and area fill.
+
+--- a/src/shell/bar/widgets/sysmon_widget.cpp
++++ b/src/shell/bar/widgets/sysmon_widget.cpp
+@@ -317,6 +317,7 @@ void SysmonWidget::syncVisualPalette() {
+   if (m_chartBg != nullptr) {
+     RoundedRectStyle bgStyle;
+     bgStyle.fill = colorForRole(ColorRole::SurfaceVariant);
++    bgStyle.fill.alpha = 0.0F;
+     bgStyle.radius = Style::scaledRadiusSm();
+     bgStyle.softness = 0.5F;
+     m_chartBg->setStyle(bgStyle);
