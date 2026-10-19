@@ -1,4 +1,4 @@
-# zentoo-overlay
+# gentoo-overlay
 
 A Gentoo Portage overlay for packages not in the main tree or GURU, maintained alongside the [zentoo install guide](https://github.com/craig-miller/zentoo) — a Gentoo Linux install guide for Apple Silicon (M1) MacBooks running Asahi.
 
@@ -22,23 +22,23 @@ A Gentoo Portage overlay for packages not in the main tree or GURU, maintained a
 ## Enabling
 
 ```
-sudo vi /etc/portage/repos.conf/zentoo.conf
+sudo nvim /etc/portage/repos.conf/gentoo-overlay.conf
 ```
 
 Paste:
 
 ```
-[zentoo]
-location = /var/db/repos/zentoo
+[gentoo-overlay]
+location = /var/db/repos/gentoo-overlay
 sync-type = git
-sync-uri = https://github.com/craig-miller/zentoo-overlay.git
+sync-uri = https://github.com/craig-miller/gentoo-overlay.git
 auto-sync = yes
 ```
 
 Sync:
 
 ```
-sudo emaint -r zentoo sync
+sudo emaint -r gentoo-overlay sync
 ```
 
 ## License
