@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-# zentoo pinentry dispatcher:
+# Automatic pinentry dispatcher:
 # - desktop/Wayland sessions use the native GUI pinentry
 # - SSH/TTY/headless sessions fall back to terminal pinentry
 

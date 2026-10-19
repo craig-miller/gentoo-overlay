@@ -1,7 +1,10 @@
+# Copyright 2026 Craig Miller
+# Distributed under the terms of the MIT License
+
 EAPI=8
 
-DESCRIPTION="Zentoo GPG pinentry auto-dispatch configuration"
-HOMEPAGE="https://github.com/craig-miller/zentoo-overlay"
+DESCRIPTION="GPG pinentry auto-dispatch configuration"
+HOMEPAGE="https://github.com/craig-miller/gentoo-overlay"
 S="${WORKDIR}"
 
 LICENSE="MIT"
@@ -9,6 +12,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 
 RDEPEND="
+	!app-crypt/zentoo-pinentry-config
 	app-crypt/gnupg
 	app-crypt/pinentry[ncurses]
 	app-crypt/pinentry-egui
