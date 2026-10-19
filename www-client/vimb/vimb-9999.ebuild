@@ -1,4 +1,4 @@
-# Copyright 2026 zentoo
+# Copyright 2026 Craig Miller
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,11 +7,11 @@ inherit savedconfig flag-o-matic git-r3
 
 DESCRIPTION="A fast, lightweight, vim-like browser based on webkit (GTK4)"
 HOMEPAGE="https://fanglingsu.github.io/vimb/"
-# zentoo fork: WebKit content filters + opinionated defaults, rebased
-# onto fanglingsu/vimb master periodically. See the fork's zentoo branch
+# Craig Miller's fork: WebKit content filters + opinionated defaults, rebased
+# onto fanglingsu/vimb master periodically. See the fork's satori branch
 # git log for the delta.
 EGIT_REPO_URI="https://github.com/craig-miller/vimb.git"
-EGIT_BRANCH="zentoo"
+EGIT_BRANCH="satori"
 
 # Bundled Dark Reader library — installed to /usr/share/vimb/darkreader.js as
 # the DR-treatment engine when USE=dark-reader. The fork's user_scripts()
@@ -96,7 +96,7 @@ src_prepare() {
 
 src_compile() {
 	# GTK4 has no XEmbed; keep the flag set unconditionally. Upstream
-	# concern (not zentoo policy), so it stays in the ebuild rather
+	# concern (not fork policy), so it stays in the ebuild rather
 	# than in the fork's source.
 	append-cflags -DFEATURE_NO_XEMBED=1
 	emake PREFIX="/usr"
@@ -114,7 +114,7 @@ src_install() {
 
 	# System-default config: dark-mode=on + zm binding. Ships regardless of
 	# dark-reader USE — `set dark-mode=on` broadcasts prefers-color-scheme=dark
-	# to WebKit, an opinionated zentoo baseline independent of Dark Reader.
+	# to WebKit, a desktop baseline independent of Dark Reader.
 	insinto /etc/vimb
 	newins "${S}/resources/etc-vimb-config" config
 
