@@ -1,1 +1,2 @@
 move app-text/zentoo-research-tools app-text/research-tools
+move app-misc/zentoo-ndi-cast app-misc/ndi-cast

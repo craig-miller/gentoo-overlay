@@ -9,13 +9,13 @@
 		under a name like "Display" or "Window". Receivers on the LAN
 		(Ecamm Live, OBS, NDI Tools) pick it up automatically.
 
-		Designed for the zentoo Wayland substrate on Apple Silicon Asahi
+		Designed for the Wayland desktop on Apple Silicon Asahi
 		Linux. The pipeline forces SHM negotiation (sidestepping
 		Apple-tiled DMA-BUF) and letterboxes to 1080p so receivers
 		without per-source fit/fill see the full desktop. The companion
 		noctalia plugin provides a bar tile that toggles streaming.
 	</longdescription>
 	<upstream>
-		<remote-id type="github">craig-miller/zentoo-overlay</remote-id>
+		<remote-id type="github">craig-miller/gentoo-overlay</remote-id>
 	</upstream>
 </pkgmetadata>

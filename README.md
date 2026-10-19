@@ -8,7 +8,7 @@ A Gentoo Portage overlay for packages not in the main tree or GURU, maintained a
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `app-laptop/asahi-brightnessd`                | C daemon driving display + keyboard backlight from the M1 ambient-light sensor ([source](https://github.com/craig-miller/asahi-brightnessd)) |
 | `app-misc/vimb-blocklist`                     | WebKit-native ad + tracker + cookie-banner blocking for vimb: weekly refresh cron + C compile binary ([source](https://github.com/craig-miller/vimb-blocklist)) |
-| `app-misc/zentoo-ndi-cast`                    | Helper that broadcasts the desktop as an NDI source on the LAN, paired with the [`zentoo/ndi_sender`](https://github.com/craig-miller/zentoo-noctalia-plugins) Noctalia plugin |
+| `app-misc/ndi-cast`                    | Helper that broadcasts the desktop as an NDI source on the LAN, paired with the [`zentoo/ndi_sender`](https://github.com/craig-miller/zentoo-noctalia-plugins) Noctalia plugin |
 | `app-portage/pycargoebuild`                   | Local backport of pycargoebuild ahead of the main tree                                                                                       |
 | `dev-util/adblock-rust-cli`                   | Convert EasyList/ABP filter lists to Apple WKContentRuleList JSON; feeds `app-misc/vimb-blocklist` ([source](https://github.com/craig-miller/adblock-rust-cli)) |
 | `gui-apps/noctalia-greeter`                   | Noctalia-matching login UI for greetd ([source](https://github.com/noctalia-dev/noctalia-greeter))                                           |

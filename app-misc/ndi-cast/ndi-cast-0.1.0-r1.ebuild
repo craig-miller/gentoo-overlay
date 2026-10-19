@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python3_{11..14} )
 inherit python-single-r1
 
 DESCRIPTION="Broadcast the local desktop as an NDI source over the LAN"
-HOMEPAGE="https://github.com/craig-miller/zentoo-overlay"
+HOMEPAGE="https://github.com/craig-miller/gentoo-overlay"
 S="${WORKDIR}"
 
 LICENSE="MIT"
@@ -17,10 +17,11 @@ KEYWORDS="~arm64"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-# Runtime requires PipeWire screencast via xdg-desktop-portal (gnome backend),
+# Runtime requires PipeWire screencast via xdg-desktop-portal (wlr backend),
 # gst-launch-1.0 with capssetter (gst-plugins-bad) + ndisink (gst-plugin-ndi),
 # and the dbus-python + pygobject bindings under the same Python slot.
 RDEPEND="
+	!app-misc/zentoo-ndi-cast
 	${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/dbus-python[${PYTHON_USEDEP}]
@@ -30,10 +31,10 @@ RDEPEND="
 	media-libs/gst-plugins-base
 	media-libs/gst-plugins-bad
 	media-plugins/gst-plugin-ndi
-	sys-apps/xdg-desktop-portal-gnome
+	gui-libs/xdg-desktop-portal-wlr
 "
 
 src_install() {
 	python_setup
-	python_doscript "${FILESDIR}/zentoo-ndi-cast"
+	python_doscript "${FILESDIR}/ndi-cast"
 }

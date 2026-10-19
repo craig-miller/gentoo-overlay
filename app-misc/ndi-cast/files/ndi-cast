@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-zentoo-ndi-cast — broadcast the local desktop as NDI on the LAN.
+ndi-cast — broadcast the local desktop as NDI on the LAN.
 
 Opens an xdg-desktop-portal ScreenCast session (the system popup lets you
 pick a monitor or window), then spawns gst-launch-1.0 to wrap the PipeWire
 stream as an NDI source. Any NDI receiver on the LAN (Ecamm Live, OBS,
 NDI Tools) picks it up by name.
 
-Requires zentoo-overlay's gui-wm/niri ebuild (carries PR #1791 — SHM
+Requires gentoo-overlay's gui-wm/niri ebuild (carries PR #1791 — SHM
 fallback for niri's PipeWire screencast stream). The `! video/x-raw !`
 capsfilter below forces PipeWire onto the SHM (modifier-less) format —
 without it pipewiresrc prefers DMA-BUF and on Apple GPU ends up with the
@@ -55,18 +55,18 @@ def _arrange_pdeathsig():
         pass
 
 XDG_STATE_HOME = os.environ.get('XDG_STATE_HOME') or os.path.expanduser('~/.local/state')
-LOG_PATH = os.path.join(XDG_STATE_HOME, 'zentoo-ndi-cast.log')
-RESTORE_TOKEN_PATH = os.path.join(XDG_STATE_HOME, 'zentoo-ndi-cast.restore_token')
-PID_PATH = os.path.join(XDG_STATE_HOME, 'zentoo-ndi-cast.pid')
+LOG_PATH = os.path.join(XDG_STATE_HOME, 'ndi-cast.log')
+RESTORE_TOKEN_PATH = os.path.join(XDG_STATE_HOME, 'ndi-cast.restore_token')
+PID_PATH = os.path.join(XDG_STATE_HOME, 'ndi-cast.pid')
 
 
 def log(msg):
-    print(f'zentoo-ndi-cast: {msg}', flush=True)
+    print(f'ndi-cast: {msg}', flush=True)
 
 
 def parse_args():
     p = argparse.ArgumentParser(
-        prog='zentoo-ndi-cast',
+        prog='ndi-cast',
         description='Broadcast the local desktop as NDI on the LAN.',
     )
     p.add_argument('--ndi-name', default=None,
@@ -170,7 +170,7 @@ def main():
         pipeline = (
             f'pipewiresrc fd={state["fd"]} path={state["node"]} do-timestamp=true '
             # `! video/x-raw !` (no DMABuf feature) forces SHM negotiation with niri's
-            # screencast stream — see niri PR #1791 backport in the zentoo overlay ebuild.
+            # screencast stream — see niri PR #1791 backport in the gentoo-overlay ebuild.
             f'! video/x-raw '
             # PipeWire reports pixel-aspect-ratio=1/INT_MAX (gst's "unknown" sentinel),
             # which makes videoscale treat the source as having effectively-zero DAR and
@@ -236,7 +236,7 @@ def main():
     listen_once(request_path(token), on_create)
     sc.CreateSession({
         'handle_token': token,
-        'session_handle_token': 'zentoo_cast_' + secrets.token_hex(4),
+        'session_handle_token': 'ndi_cast_' + secrets.token_hex(4),
     })
     log('waiting for portal popup...')
     loop.run()
