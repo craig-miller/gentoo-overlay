@@ -6,7 +6,7 @@ EAPI=8
 inherit desktop
 
 DESCRIPTION="Research/PKM tools: sioyek->typst highlights + card-list daemon + setup"
-HOMEPAGE="https://github.com/craig-miller/zentoo-overlay"
+HOMEPAGE="https://github.com/craig-miller/gentoo-overlay"
 S="${WORKDIR}"
 
 LICENSE="MIT"
@@ -14,6 +14,7 @@ SLOT="0"
 KEYWORDS="~arm64"
 
 RDEPEND="
+	!app-text/zentoo-research-tools
 	app-text/sioyek
 	dev-lang/python:*
 	app-shells/bash
@@ -31,13 +32,13 @@ src_install() {
 	insinto /etc/xdg/autostart
 	doins "${FILESDIR}"/research-cards.desktop
 
-	insinto /usr/share/zentoo-research/templates
+	insinto /usr/share/research-tools/templates
 	doins "${FILESDIR}"/templates/note.typ
 	doins "${FILESDIR}"/templates/README.md
-	insinto /usr/share/zentoo-research/templates/csl
+	insinto /usr/share/research-tools/templates/csl
 	doins "${FILESDIR}"/templates/csl/taylor-and-francis-harvard-x.csl
 
-	insinto /usr/share/zentoo-research/defaults
+	insinto /usr/share/research-tools/defaults
 	doins "${FILESDIR}"/defaults/papis-config
 	doins "${FILESDIR}"/defaults/papis-config.py
 	doins "${FILESDIR}"/defaults/papis-notes-template.typ

@@ -1,5 +1,5 @@
 #!/bin/bash
-# research-setup — bootstrap a working zentoo research PKM installation.
+# research-setup — bootstrap a working research PKM installation.
 #
 # Idempotent + non-destructive: safe to run repeatedly. Never overwrites an
 # existing user file. Prints what it did, skipped, and warns about session-
@@ -11,7 +11,7 @@
 
 set -euo pipefail
 
-SHARE=/usr/share/zentoo-research
+SHARE=/usr/share/research-tools
 TEMPLATES_SRC=$SHARE/templates
 DEFAULTS_SRC=$SHARE/defaults
 VAULT=${RESEARCH_VAULT:-$HOME/research}
@@ -73,7 +73,7 @@ copy_missing() {
 render_launcher_missing() {
     local src=$1 dst=$2 sed_arg=$3
     if [[ ! -f $src ]]; then
-        log_warn "$src missing (reinstall app-text/zentoo-research-tools)"
+        log_warn "$src missing (reinstall app-text/research-tools)"
     elif [[ -f $dst ]]; then
         log_skip "$dst"
     elif (( DRY_RUN )); then
@@ -200,7 +200,7 @@ ensure_dir "$VAULT/notes"
 ensure_dir "$VAULT/manuscripts"
 # Vault templates live under a dot-prefixed dir so zeta's note-graph scan
 # skips them (zeta's IngoreDir short-circuits any relative path starting
-# with "."). Bundle source stays as /usr/share/zentoo-research/templates/
+# with "."). Bundle source stays as /usr/share/research-tools/templates/
 # — dot-prefix is a vault-side concern only.
 ensure_dir "$VAULT/.templates/csl"
 write_typst_toml "$VAULT/typst.toml"
@@ -271,7 +271,7 @@ say "research-cards-daemon"
 if pgrep -f /usr/bin/research-cards-daemon >/dev/null 2>&1; then
     log_skip "daemon already running"
 elif [[ ! -x /usr/bin/research-cards-daemon ]]; then
-    log_warn "/usr/bin/research-cards-daemon missing (reinstall app-text/zentoo-research-tools)"
+    log_warn "/usr/bin/research-cards-daemon missing (reinstall app-text/research-tools)"
 elif (( DRY_RUN )); then
     log_would "start /usr/bin/research-cards-daemon in background"
 else
