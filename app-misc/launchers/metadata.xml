@@ -2,7 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<longdescription>
-		Custom XDG desktop launcher entries for zentoo. Each .desktop
+		Custom XDG desktop launcher entries. Each .desktop
 		file in files/ installs to /usr/share/applications/ and is
 		picked up by noctalia's launcher and any other XDG-compliant
 		application menu. Use this package for one-off launchers that
@@ -10,6 +10,6 @@
 		terminals, conference-app shortcuts, etc.
 	</longdescription>
 	<upstream>
-		<remote-id type="github">craig-miller/zentoo-overlay</remote-id>
+		<remote-id type="github">craig-miller/gentoo-overlay</remote-id>
 	</upstream>
 </pkgmetadata>

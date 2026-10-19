@@ -1,6 +1,6 @@
 #!/bin/bash
 # network-browser — discover LAN file shares via Avahi, copy a mount URI to
-# the Wayland clipboard. Shipped by app-misc/zentoo-launchers.
+# the Wayland clipboard. Shipped by app-misc/launchers.
 #
 # Flow: avahi service picker → host pick → (SMB) `gio list smb://host/`
 # best-effort enumeration → fzf share picker if non-empty, typed share

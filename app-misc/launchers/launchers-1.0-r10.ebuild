@@ -5,8 +5,8 @@ EAPI=8
 
 inherit desktop
 
-DESCRIPTION="Custom XDG launcher entries for zentoo (Open Camera, etc.)"
-HOMEPAGE="https://github.com/craig-miller/zentoo-overlay"
+DESCRIPTION="Custom XDG desktop launcher entries (Open Camera, etc.)"
+HOMEPAGE="https://github.com/craig-miller/gentoo-overlay"
 S="${WORKDIR}"
 
 LICENSE="MIT"
@@ -19,13 +19,14 @@ KEYWORDS="~arm64"
 # Runtime deps for the apps the launchers invoke are unioned here so
 # removing them surfaces via portage.
 RDEPEND="
+	!app-misc/zentoo-launchers
 	media-video/mpv
 	app-admin/pass-otp
 	net-dns/avahi
 	net-fs/samba
 	gui-apps/wl-clipboard
 	gnome-base/gvfs
-     media-sound/qobuz-player
+	media-sound/qobuz-player
 "
 
 src_install() {
