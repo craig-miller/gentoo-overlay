@@ -1,33 +1,35 @@
 # gentoo-overlay
 
-A Gentoo Portage overlay for packages not in the main tree or GURU, maintained alongside the [zentoo install guide](https://github.com/craig-miller/zentoo) — a Gentoo Linux install guide for Apple Silicon (M1) MacBooks running Asahi.
+My Gentoo Portage overlay, with additional packages, pinned versions, and local patches for a Wayland desktop on Apple Silicon running Asahi Linux.
 
-## Packages
+This overlay supplements the main Gentoo repository and GURU. Package availability and architecture support vary; consult each ebuild's keywords and dependencies before installing.
 
-| Package                                       | Purpose                                                                                                                                      |
-| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app-laptop/asahi-brightnessd`                | C daemon driving display + keyboard backlight from the M1 ambient-light sensor ([source](https://github.com/craig-miller/asahi-brightnessd)) |
-| `app-misc/vimb-blocklist`                     | WebKit-native ad + tracker + cookie-banner blocking for vimb: weekly refresh cron + C compile binary ([source](https://github.com/craig-miller/vimb-blocklist)) |
-| `app-misc/ndi-cast`                    | Helper that broadcasts the desktop as an NDI source on the LAN, paired with the [`zentoo/ndi_sender`](https://github.com/craig-miller/zentoo-noctalia-plugins) Noctalia plugin |
-| `app-portage/pycargoebuild`                   | Local backport of pycargoebuild ahead of the main tree                                                                                       |
-| `dev-util/adblock-rust-cli`                   | Convert EasyList/ABP filter lists to Apple WKContentRuleList JSON; feeds `app-misc/vimb-blocklist` ([source](https://github.com/craig-miller/adblock-rust-cli)) |
-| `gui-apps/noctalia-greeter`                   | Noctalia-matching login UI for greetd ([source](https://github.com/noctalia-dev/noctalia-greeter))                                           |
-| `gui-apps/noctalia-shell`                     | Material You Wayland shell ([source](https://github.com/noctalia-dev/noctalia-shell))                                                        |
-| `gui-apps/soundthemed`                        | Freedesktop sound-theme daemon ([source](https://github.com/destructatron/soundthemed))                                                      |
-| `sys-boot/grub`                               | Patched GRUB silencing `Loading Linux ...` / `Loading initial ramdisk ...` echoes for the install guide's quiet-boot chain                   |
-| `sys-boot/u-boot`                             | Patched Asahi U-Boot, silenced console + framebuffer output, zero autoboot delay, for the install guide's quiet-boot chain                   |
-| `www-client/vimb`                             | Fast vim-like WebKitGTK browser, patched against `net-libs/webkit-gtk:6` + `gui-libs/gtk:4` with native content-filter loading                |
-| `x11-themes/plymouth-theme-spinfinity-zentoo` | Plymouth boot theme — centered infinity spinner with white pill LUKS entry on black background                                               |
+## Selected packages
 
-## Enabling
+| Package | Purpose |
+| --- | --- |
+| `app-crypt/pinentry-config` | Automatic GUI or terminal GPG pinentry selection |
+| `app-laptop/asahi-brightnessd` | Ambient-light display and keyboard brightness control for Apple Silicon |
+| `app-misc/ndi-cast` | Broadcast the desktop as an NDI source; integrates with the [Noctalia plugins](https://github.com/craig-miller/noctalia-plugins) |
+| `app-misc/vimb-blocklist` | Native ad, tracker, and cookie-banner filtering for vimb |
+| `app-portage/pycargoebuild` | Backported Rust ebuild generation tooling |
+| `app-text/research-tools` | Research and PKM integration for Sioyek, Typst, and paper notes |
+| `dev-util/adblock-rust-cli` | Convert filter lists to WebKit content-blocking rules |
+| `gui-apps/noctalia-greeter` | Noctalia-themed login interface for greetd |
+| `gui-apps/noctalia-shell` | Wayland desktop shell |
+| `gui-apps/soundthemed` | Freedesktop sound-theme daemon |
+| `mail-client/mailviewer` | GTK4 viewer for EML and Outlook MSG files |
+| `sys-boot/grub` | Patched GRUB for a quieter boot sequence |
+| `sys-boot/u-boot` | Patched Asahi U-Boot with quiet console output and zero autoboot delay |
+| `www-client/vimb` | Vim-like browser with GTK4, WebKitGTK 6, and native content filtering |
 
-```
-sudo nvim /etc/portage/repos.conf/gentoo-overlay.conf
-```
+This is a selection, not a complete package index. Browse the category directories for the full contents.
 
-Paste:
+## Enable the overlay
 
-```
+Create `/etc/portage/repos.conf/gentoo-overlay.conf` with:
+
+```ini
 [gentoo-overlay]
 location = /var/db/repos/gentoo-overlay
 sync-type = git
@@ -35,12 +37,23 @@ sync-uri = https://github.com/craig-miller/gentoo-overlay.git
 auto-sync = yes
 ```
 
-Sync:
+Synchronize:
 
-```
+```sh
 sudo emaint -r gentoo-overlay sync
 ```
 
+Some packages have testing keywords or require dependencies from another overlay. Accept keywords selectively for the packages you intend to use rather than enabling testing globally.
+
+### Maintainer checkout
+
+For a user-managed checkout, use `auto-sync = false` instead. Portage reads the working tree; Git operations and publication are managed manually.
+
+## Documentation
+
+- [Gentoo system documentation](https://github.com/craig-miller/gentoo-docs)
+- [Companion Noctalia plugins](https://github.com/craig-miller/noctalia-plugins)
+
 ## License
 
-This overlay is distributed under the [GNU General Public License v2](LICENSE). Individual ebuilds carry the upstream package's own license — see each ebuild's `LICENSE=` field.
+The overlay is distributed under the [GNU General Public License v2](LICENSE). Individual packages retain their upstream licenses, declared in each ebuild's `LICENSE` field.
