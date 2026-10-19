@@ -2,10 +2,10 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<upstream>
-		<remote-id type="github">craig-miller/zentoo-overlay</remote-id>
+		<remote-id type="github">craig-miller/gentoo-overlay</remote-id>
 	</upstream>
 	<longdescription>
-		Plymouth boot theme built on the upstream two-step plugin.
+		Zenrocks Plymouth boot theme built on the upstream two-step plugin.
 
 		Renders a centered rotating infinity spinner on a black background with
 		a thin white progress bar at the bottom. The LUKS unlock dialog is a

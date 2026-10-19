@@ -2,3 +2,4 @@ move app-text/zentoo-research-tools app-text/research-tools
 move app-misc/zentoo-ndi-cast app-misc/ndi-cast
 move app-crypt/zentoo-pinentry-config app-crypt/pinentry-config
 move app-misc/zentoo-launchers app-misc/launchers
+move x11-themes/plymouth-theme-spinfinity-zentoo x11-themes/plymouth-theme-spinfinity-zenrocks

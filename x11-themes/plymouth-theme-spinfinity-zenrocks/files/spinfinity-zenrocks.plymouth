@@ -1,10 +1,10 @@
 [Plymouth Theme]
-Name=Spinfinity-zentoo
+Name=Spinfinity Zenrocks
 Description=Rotating infinity sign on black with bottom progress bar
 ModuleName=two-step
 
 [two-step]
-ImageDir=/usr/share/plymouth/themes/spinfinity-zentoo
+ImageDir=/usr/share/plymouth/themes/spinfinity-zenrocks
 BackgroundStartColor=0x000000
 BackgroundEndColor=0x000000
 HorizontalAlignment=0.5
