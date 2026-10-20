@@ -1,4 +1,4 @@
-From: Zentoo <zentoo@localhost>
+From: Craig Miller
 Subject: [PATCH] Use Ctrl+I to toggle shortcut inhibition
 
 Use an application-level Ctrl+I chord as the local shortcut-inhibitor

@@ -1,6 +1,6 @@
 #!/bin/sh
 # vnc — choose a saved VNC host from pass using Noctalia dmenu, then launch
-# wlvncc with zentoo's Wayland-native macOS-friendly defaults.
+# wlvncc with Wayland-native macOS-friendly defaults.
 
 set -eu
 
@@ -20,6 +20,6 @@ host="$(
 
 [ -n "$host" ] || exit 0
 
-exec wlvncc -a zentoo-vnc -d -i -e copyrect,raw \
+exec wlvncc -a remote-desktop -d -i -e copyrect,raw \
   -A "pass show vnc/$host/username; pass show vnc/$host/password" \
   "$host"
